@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "62789864298",
+    "firebase_url": "https://reactappdemo-e6c17.firebaseio.com",
+    "project_id": "reactappdemo-e6c17",
+    "storage_bucket": "reactappdemo-e6c17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62789864298:android:7c82412ee74dec6fc07313",
+        "android_client_info": {
+          "package_name": "com.testreactdata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62789864298-i0pbcq4ubf1o9jp1m4jpvb2tlahb52el.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUgaDCMddcvtF83VPgMrT6Ql_RJvjeV1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62789864298-i0pbcq4ubf1o9jp1m4jpvb2tlahb52el.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "62789864298-8r5jikvouhvd9b3j0a9cl75h7dgnqhin.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dungmori.TestReactData",
+                "app_store_id": "123456"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
