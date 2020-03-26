@@ -4,6 +4,7 @@ import { Text, View, SafeAreaView, TextInput, Dimensions, StyleSheet, TouchableO
 const { width, height } = Dimensions.get('window');
 import firebase from 'react-native-firebase';
 import DropAlert from '../components/DropDownAlert';
+import * as Facebook from '../helpers/Facebook';
 
 export default class Login extends Component {
   state = {
@@ -42,6 +43,19 @@ export default class Login extends Component {
   onChangeTextPass = password => {
     this.setState({
       password
+    });
+  };
+
+  // Login Facebook
+  onPressLoginFacebook = () => {
+    Facebook.login(async (isOk, res) => {
+      if (isOk) {
+        res.provider = 'facebook';
+        const appId = deviceId;
+        if (appId !== null) {
+          res.app_id = appId;
+        }
+      }
     });
   };
 
@@ -99,8 +113,12 @@ export default class Login extends Component {
           <Text style={styles.textButtonLogin}>Register</Text>
         </TouchableOpacity>
         <View style={styles.loginFacebook}>
-          <Image style={styles.icon} source={require('../images/ic_fb.png')} />
-          <Image style={styles.icon} source={require('../images/ic_gg.png')} />
+          <TouchableOpacity onPress={this.onPressLoginFacebook}>
+            <Image style={styles.icon} source={require('../images/ic_fb.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onPressLoginGoogle}>
+            <Image style={styles.icon} source={require('../images/ic_gg.png')} />
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     );
@@ -135,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   textButton: {
-    color: '#000',
+    color: 'green',
     fontWeight: '600',
     fontSize: 16
   },
