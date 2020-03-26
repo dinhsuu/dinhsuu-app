@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, SafeAreaView, TextInput, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, TextInput, Dimensions, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 import firebase from 'react-native-firebase';
@@ -92,13 +92,16 @@ export default class Login extends Component {
           onChangeText={this.onChangeTextPass}
           value={this.state.password}
         />
-        <TouchableOpacity onPress={this.handleSingIn} style={styles.btnSingup}>
+        <TouchableOpacity onPress={this.handleSingIn} style={styles.btnLogin}>
           <Text style={styles.textButton}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleSingUp} style={styles.btnLogin}>
+        <TouchableOpacity onPress={this.handleSingUp} style={styles.btnSingup}>
           <Text style={styles.textButtonLogin}>Register</Text>
         </TouchableOpacity>
-        <DropAlert ref={refs => (this.DropAlert = refs)} />
+        <View style={styles.loginFacebook}>
+          <Image style={styles.icon} source={require('../images/ic_fb.png')} />
+          <Image style={styles.icon} source={require('../images/ic_gg.png')} />
+        </View>
       </SafeAreaView>
     );
   }
@@ -116,15 +119,20 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderWidth: 1,
     borderColor: 'green',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    borderRadius: 20
   },
-  btnSingup: {
+  btnLogin: {
     paddingHorizontal: 20,
-    paddingVertical: 5,
+    paddingVertical: 7,
     marginTop: 25,
     borderWidth: 1,
     borderColor: 'green',
-    paddingHorizontal: 25
+    paddingHorizontal: 25,
+    borderRadius: 20
+  },
+  btnSingup: {
+    marginTop: 10
   },
   textButton: {
     color: '#000',
@@ -140,5 +148,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#333',
     marginBottom: 40
+  },
+  loginFacebook: {
+    flexDirection: 'row',
+    marginTop: 50
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    marginHorizontal: 10
   }
 });
