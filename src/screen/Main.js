@@ -23,7 +23,7 @@ export default class SignUp extends Component {
     const { currentUser } = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <Text>hi {currentUser && currentUser.email}</Text>
+        <Text>hihihi</Text>
       </SafeAreaView>
     );
   }
