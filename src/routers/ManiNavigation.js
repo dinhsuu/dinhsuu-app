@@ -4,6 +4,7 @@ import React from 'react';
 import Login from '../screen/Login';
 import Main from '../screen/Main';
 import SignUp from '../screen/SignUp';
+import TestAppContext from '../screen/TestAppContext';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,14 @@ function MyStack() {
           headerShown: false
         }}
       />
+     
+      {/* <Stack.Screen
+        name="TestAppContext"
+        component={TestAppContext}
+        options={{
+          headerShown: false
+        }}
+      /> */}
       <Stack.Screen
         name="Main"
         component={Main}

@@ -39,7 +39,7 @@ export default class SignUp extends Component {
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       // .then(() => this.props.navigation.navigate('Main'))
       .catch(error => this.setState({ errorMessage: error.message }));
-      DropDownAlert.success('thong bao', 'dang nhap thanh cong')
+    DropDownAlert.success('thong bao', 'dang nhap thanh cong');
   };
 
   handleSingIn = () => {
@@ -51,14 +51,21 @@ export default class SignUp extends Component {
       <SafeAreaView style={styles.container}>
         <Text style={styles.textReghister}> Register </Text>
         <TextInput
-          placeholder="Email"
+          placeholder="name"
           autoCapitalize="none"
           style={styles.textInput}
           onChangeText={this.onChangeTextEmail}
           value={this.state.email}
         />
         <TextInput
-          placeholder="PassWord"
+          placeholder="email"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={this.onChangeTextEmail}
+          value={this.state.email}
+        />
+        <TextInput
+          placeholder="password"
           autoCapitalize="none"
           secureTextEntry={true}
           style={styles.textInput}

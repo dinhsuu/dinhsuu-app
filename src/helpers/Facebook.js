@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 const FBSDK = require('react-native-fbsdk');
 const { LoginManager, AccessToken, GraphRequest, GraphRequestManager } = FBSDK;
 const FB_USER_DATA = 'FB_USER_DATA';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export async function login(callback, cancelCallback, isTryLogin) {
   try {
@@ -27,6 +28,7 @@ export async function login(callback, cancelCallback, isTryLogin) {
           callback(true, user);
 
           // Save storage
+          AsyncStorage.setItem(FB_USER_DATA, JSON.stringify(user));
         } else {
           callback(fales, err);
         }

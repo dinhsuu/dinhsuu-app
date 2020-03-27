@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 // import OneSignal from 'react-native-onesignal';
 import ManiNavigation from './src/routers/ManiNavigation';
+import AppProvider from './src/helpers/AppProvider';
+import DropAlert from './src/components/DropDownAlert';
 
 class App extends React.Component {
   // constructor(props) {
@@ -35,9 +37,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <AppProvider style={styles.container}>
         <ManiNavigation />
-      </View>
+        <DropAlert />
+      </AppProvider>
     );
   }
 }

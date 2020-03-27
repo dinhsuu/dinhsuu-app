@@ -1,11 +1,28 @@
 import React, { Component } from 'react';
 import { Text, View, SafeAreaView, TextInput, Dimensions, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import AppProvider from '../helpers/AppProvider';
+import AppContext from '../helpers/AppContext';
 
 const { width, height } = Dimensions.get('window');
-import firebase from 'react-native-firebase';
-import DropAlert from '../components/DropDownAlert';
-import * as Facebook from '../helpers/Facebook';
-import AppProvider from '../helpers/AppProvider';
+class Item extends Component {
+  render() {
+    const { email, password } = this.props;
+    return (
+      <AppContext.Consumer>
+        {({ addText, updateText }) => {
+          return (
+            <SafeAreaView style={{ paddingVertical: 20 }}>
+              <View style={styles.viewContent}>
+                <Text style={styles.textTitle}>{addText && addText.email ? addText.email : 'dinh suu'}</Text>
+                <Text style={styles.textTitle}>{addText && addText.password ? addText.password : '123456'}</Text>
+              </View>
+            </SafeAreaView>
+          );
+        }}
+      </AppContext.Consumer>
+    );
+  }
+}
 
 export default class Login extends Component {
   state = {
@@ -27,31 +44,14 @@ export default class Login extends Component {
     });
   };
 
-  // Login Facebook
-  onPressLoginFacebook = () => {
-    Facebook.login(async (isOk, res) => {
-      if (isOk) {
-        res.provider = 'facebook';
-        AppProvider.getContext().onLogin(res);
-        this.props.navigation.navigate('Main');
-      }
-    });
-  };
-
   handleSingIn = () => {
     const { email, password } = this.state;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(confirmResult => {
-        this.setState({ confirmResult, message: 'Code has been sent!' });
-        this.props.navigation.navigate('Main');
-        DropAlert.success('thong bao', 'Dang nhap thanh cong');
-      })
-      .catch(error => {
-        this.setState({ errorMessage: error.message });
-        DropAlert.error('thong bao', 'Dang nhap khong thanh cong');
-      });
+    const data = {
+      email,
+      password
+    };
+    AppProvider.getContext().onAddText(data);
+    AppProvider.getContext().onUpdateText(data);
   };
 
   handleSingUp = () => {
@@ -59,8 +59,10 @@ export default class Login extends Component {
   };
 
   render() {
+    const { email, password } = this.state;
     return (
       <SafeAreaView style={styles.container}>
+        <Item />
         <Text style={styles.textSign}> Sign In </Text>
         <TextInput
           placeholder={'email'}
@@ -80,17 +82,6 @@ export default class Login extends Component {
         <TouchableOpacity onPress={this.handleSingIn} style={styles.btnLogin}>
           <Text style={styles.textButton}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.handleSingUp} style={styles.btnSingup}>
-          <Text style={styles.textButtonLogin}>Register</Text>
-        </TouchableOpacity>
-        <View style={styles.loginFacebook}>
-          <TouchableOpacity onPress={this.onPressLoginFacebook}>
-            <Image style={styles.icon} source={require('../images/ic_fb.png')} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.onPressLoginGoogle}>
-            <Image style={styles.icon} source={require('../images/ic_gg.png')} />
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     );
   }
@@ -99,8 +90,8 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 50
   },
   textInput: {
     width: width / 1.5,
@@ -136,7 +127,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
     color: '#333',
-    marginBottom: 40
+    marginBottom: 40,
+    marginTop: 50
   },
   loginFacebook: {
     flexDirection: 'row',
@@ -146,5 +138,14 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginHorizontal: 10
+  },
+  textTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginTop: 10,
+    borderColor: 'green',
+    borderWidth: 1,
+    width: 200,
+    padding: 5
   }
 });
