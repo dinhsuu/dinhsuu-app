@@ -10,10 +10,11 @@ export default class SignUp extends Component {
     return (
       <AppContext.Consumer>
         {({ login }) => {
+          console.log('###########login', login);
           return (
             <SafeAreaView style={styles.container}>
               <View style={styles.viewContent}>
-                <Image style={styles.avata} source={{ uri: login.avata }} />
+                {/* <Image style={styles.avata} source={{ uri: login.avata ? login.avata : '' }} /> */}
                 <Text style={styles.textTitle}>{login.name}</Text>
               </View>
             </SafeAreaView>
@@ -29,22 +30,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   viewContent: {
     backgroundColor: '#eee',
-    padding: 20
+    padding: 20,
   },
   textTitle: {
     fontSize: 14,
     fontWeight: '600',
-    marginTop: 10
+    marginTop: 10,
   },
   avata: {
     width: 30,
     height: 30,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: 'green'
-  }
+    borderColor: 'green',
+  },
 });

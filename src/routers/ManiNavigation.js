@@ -13,6 +13,13 @@ function MyStack() {
     <Stack.Navigator>
       {/* <Stack.Screen name="Loadding" component={Loadding} /> */}
       <Stack.Screen
+        name="TestAppContext"
+        component={TestAppContext}
+        options={{
+          headerShown: false,
+        }}
+      />
+      {/* <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -27,20 +34,14 @@ function MyStack() {
         }}
       />
      
-      {/* <Stack.Screen
-        name="TestAppContext"
-        component={TestAppContext}
-        options={{
-          headerShown: false
-        }}
-      /> */}
+   
       <Stack.Screen
         name="Main"
         component={Main}
         options={{
           headerShown: false
         }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 }

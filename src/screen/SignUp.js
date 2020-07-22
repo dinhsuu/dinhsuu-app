@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   TextInput,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import firebase from 'react-native-firebase';
 import DropDownAlert from '../components/DropDownAlert';
@@ -16,29 +16,35 @@ const { width, height } = Dimensions.get('window');
 
 export default class SignUp extends Component {
   state = {
+    name: '',
     email: '',
     password: '',
-    erroMessage: null
+    erroMessage: null,
   };
 
-  onChangeTextEmail = email => {
+  onChangeTextName = (name) => {
     this.setState({
-      email
+      name,
     });
   };
 
-  onChangeTexPass = password => {
+  onChangeTextEmail = (email) => {
     this.setState({
-      password
+      email,
+    });
+  };
+
+  onChangeTexPass = (password) => {
+    this.setState({
+      password,
     });
   };
 
   handleSingUp = () => {
     firebase
       .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      // .then(() => this.props.navigation.navigate('Main'))
-      .catch(error => this.setState({ errorMessage: error.message }));
+      .createUserWithEmailAndPassword(this.state.name, this.state.email, this.state.password)
+      .catch((error) => this.setState({ errorMessage: error.message }));
     DropDownAlert.success('thong bao', 'dang nhap thanh cong');
   };
 
@@ -54,8 +60,8 @@ export default class SignUp extends Component {
           placeholder="name"
           autoCapitalize="none"
           style={styles.textInput}
-          onChangeText={this.onChangeTextEmail}
-          value={this.state.email}
+          onChangeText={this.onChangeTextName}
+          value={this.state.name}
         />
         <TextInput
           placeholder="email"
@@ -87,13 +93,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textReghister: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 40
+    marginBottom: 40,
   },
   textInput: {
     width: width / 1.5,
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderWidth: 1,
     borderColor: 'green',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   btnSingup: {
     paddingHorizontal: 20,
@@ -109,15 +115,15 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderWidth: 1,
     borderColor: 'green',
-    paddingHorizontal: 25
+    paddingHorizontal: 25,
   },
   textButton: {
     color: '#000',
     fontWeight: '600',
-    fontSize: 16
+    fontSize: 16,
   },
   textButtonLogin: {
     color: 'red',
-    marginTop: 15
-  }
+    marginTop: 15,
+  },
 });

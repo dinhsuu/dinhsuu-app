@@ -45,6 +45,7 @@ export default class Login extends Component {
       .signInWithEmailAndPassword(email, password)
       .then(confirmResult => {
         this.setState({ confirmResult, message: 'Code has been sent!' });
+        AppProvider.getContext().onLogin(confirmResult);
         this.props.navigation.navigate('Main');
         DropAlert.success('thong bao', 'Dang nhap thanh cong');
       })
